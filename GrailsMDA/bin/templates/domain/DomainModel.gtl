@@ -1,0 +1,58 @@
+<% if (getPackageName(currentModelElement) != "") { %>
+package ${getPackageName(currentModelElement)};
+<% } %>
+
+/**
+ * ${helloWorld(currentModelElement.name)} 
+ */
+public class ${currentModelElement.name} {
+        <%
+		def belongsToMap = [:]
+		def hasManyMap = [:]
+        getAttributes(currentModelElement).each { attribute ->
+                def attributeName = attribute.name
+                def attributeType = javaType(attribute.type)
+%>
+     ${attributeType} ${attributeName};
+<%
+        }
+        getAssociationEnds(model, currentModelElement).each { sourceEnd ->
+                def association = sourceEnd.association
+                def targetEnd = association.connection.find { end -> end != sourceEnd }
+				def targetType = getEndType(targetEnd)
+				def targetName = getEndName(targetEnd)
+				def	className = "${targetEnd.participant.name}"//"${firstCharUpper(targetName)[0..-2]}"
+                if (!sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
+						if(isOneToOne(sourceEnd, targetEnd)){
+%>
+	${firstCharUpper(targetName)} ${targetName};
+<%
+						} else if(isManyToMany(sourceEnd, targetEnd)){
+							hasManyMap.put(targetName,className)
+						}
+                } else if (sourceEnd.isNavigable() && !targetEnd.isNavigable()){
+						if(isOneToOne(sourceEnd, targetEnd)){
+							belongsToMap.put("${firstCharLower(targetName)}",className)
+						} else if(isManyToMany(sourceEnd, targetEnd)){
+							belongsToMap.put("${firstCharLower(className)}",className)
+							hasManyMap.put(targetName,className)
+						}
+				} else if (sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
+						if(isOneToMany(sourceEnd, targetEnd)){
+							hasManyMap.put(targetName,className)
+						}
+				}
+		}
+		
+	if(belongsToMap.size()>0){
+%>
+	static belongsTo = ${belongsToMap}
+<%
+	} 
+	if(hasManyMap.size()>0){	
+%>
+	static hasMany = ${hasManyMap}
+<%
+	}
+%>
+}
