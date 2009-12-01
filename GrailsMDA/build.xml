@@ -2,12 +2,17 @@
 <project>
 	<property environment="env." />
 	<property name="env.CLASSPATH" value="" />
-	<property name="genpath" value="./src" />
+	<property name="genpath" value="./target/src" />
+	<property name="genpathroot" value="./target" />
 	<property name="modelpath" value="jar:file:./model/agroUml.xmi.zargo!/agroUml.xmi" />
 	<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />
 	<property name="groovyMDA" value="./lib/groovymda-1.0.jar"/>
-
-	<target name="run">
+	
+	<target name="clean">
+			<delete dir="${genpathroot}" />
+	</target>
+	
+	<target name="build">
 		<java fork="true" jar="${groovyMDA}">
 			<!-- model source file -->
 			<arg value="${modelpath}" />
@@ -17,4 +22,5 @@
 			<arg value="${modelprocessorpath}" />
 		</java>
 	</target>
+	<target name="clean-build" depends="clean,build" />
 </project>
