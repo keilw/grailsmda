@@ -10,12 +10,16 @@ public class ${currentModelElement.name} {
 		def belongsToMap = [:]
 		def hasManyMap = [:]
 		def embeddedList =[]
+		def attributeConstrainsMap=[:]
         getAttributes(currentModelElement).each { attribute ->
                 def attributeName = attribute.name
                 def attributeType = javaType(attribute.type)
+                
 %>
-     ${attributeType} ${attributeName}
+	${attributeType} ${attributeName}
 <%
+			def attributeContrains = taggedValueMap(attribute)
+        	attributeConstrainsMap.put("${attributeName}",attributeContrains)
         }
         getAssociationEnds(model, currentModelElement).each { sourceEnd ->
                 def association = sourceEnd.association
@@ -25,8 +29,7 @@ public class ${currentModelElement.name} {
 				def	className = "${targetEnd.participant.name}"//"${firstCharUpper(targetName)[0..-2]}"
                 if (!sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
 						if(isOneToOne(sourceEnd, targetEnd)){
-%>
-	${firstCharUpper(targetName)} ${targetName}
+%>	${firstCharUpper(targetName)} ${targetName}
 <%
 						} else if(isManyToMany(sourceEnd, targetEnd)){
 							hasManyMap.put(targetName,className)
@@ -40,8 +43,7 @@ public class ${currentModelElement.name} {
 						}
 				} else if (sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
 						if(isComposite(sourceEnd)) {
-%>
-	${firstCharUpper(targetName)} ${targetName}
+%>	${firstCharUpper(targetName)} ${targetName}
 <%
 						embeddedList.add(targetName as String)
 						} else if(!isComposite(sourceEnd) && !isComposite(targetEnd) && isOneToMany(sourceEnd, targetEnd)){
@@ -50,18 +52,31 @@ public class ${currentModelElement.name} {
 				}
 		}
 	if(belongsToMap.size()>0){
-%>
-	static belongsTo = ${belongsToMap}
+%>	static belongsTo = ${belongsToMap}
 <%
 	} 
 	if(hasManyMap.size()>0){	
-%>
-	static hasMany = ${hasManyMap}
+%>	static hasMany = ${hasManyMap}
 <%
 	}
 	if(embeddedList.size()>0) {
+%>	static embedded = ${embeddedList}
+<%
+	}
+	if(attributeConstrainsMap.size()>0) {
+%>	static constraints = { <%
+		attributeConstrainsMap.each{key, value ->
+		  def valueBuffer = new StringBuffer()
+			value.each { keyContrain, valueContrain ->
+					if (valueBuffer.length() > 0) {
+			        	valueBuffer.append(",")
+			        }
+			         valueBuffer.append(keyContrain+":"+valueContrain)
+			}
 %>
-	static embedded = ${embeddedList}
+		${key}(${valueBuffer.toString()})
+<%	} 
+%>	}
 <%
 	}
 %>

@@ -20,6 +20,22 @@ class DomainModelProcessor extends GroovyModelProcessor {
 				context.isComposite= { end -> return end.aggregation == AggregationKindEnum.AK_COMPOSITE
 						//.equals(AggregationKindEnum.COMPOSITE.typeName) 
 						}
+				
+				context.taggedValueMap = { taggedValueModel ->
+			       def tags = [:]
+			                   taggedValueModel.taggedValue.each { taggedValue ->
+			                       def key = taggedValue.type.name
+			                       def valueBuffer = new StringBuffer()
+			                       taggedValue.dataValue.each { value ->
+			                           if (valueBuffer.length() > 0) {
+			                               valueBuffer.append(",")
+			                           }
+			                           valueBuffer.append(value)
+			                       }
+			                       tags.put("${key}", "${valueBuffer.toString()}")
+			                   }
+			                   return tags
+			               }
 				// SET THE TEMPLATE TO USE
 				def templateName = "./src/templates/domain/DomainModel.gtl"
 				
