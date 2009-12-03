@@ -74,9 +74,10 @@ public class ${currentModelElement.name} {
 			         valueBuffer.append(keyContrain+":"+valueContrain)
 			}
 %>
-		${key}(${valueBuffer.toString()})
-<%	} 
-%>	}
+		${key}(${valueBuffer.toString()})<%	
+		} 
+%>	
+	}
 <%
 	}
 %>
