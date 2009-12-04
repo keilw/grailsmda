@@ -30,10 +30,14 @@ public class ${currentModelElement.name} {
 						if(isOneToOne(sourceEnd, targetEnd)){
 %>	${firstCharUpper(targetName)} ${targetName}
 <%
+							attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
 						} else if(isManyToMany(sourceEnd, targetEnd)){
 							hasManyMap.put(targetName,className)
+							attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+						} else if(isOneToMany(sourceEnd, targetEnd)){
+							belongsToMap.put("${firstCharLower(targetName)}",className)
 						}
-        				attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+        				
                 } else if (sourceEnd.isNavigable() && !targetEnd.isNavigable()){
 						if(isOneToOne(sourceEnd, targetEnd)){
 							belongsToMap.put("${firstCharLower(targetName)}",className)
@@ -41,20 +45,32 @@ public class ${currentModelElement.name} {
 							belongsToMap.put("${firstCharLower(className)}",className)
 							hasManyMap.put(targetName,className)
 							attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+						} else if(isOneToMany(sourceEnd, targetEnd)){
+							hasManyMap.put(targetName,className)
+							attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
 						}
 				} else if (sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
 						if(isComposite(sourceEnd)) {
 %>	${firstCharUpper(targetName)} ${targetName}
 <%
-						embeddedList.add(targetName as String)
-        				attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
-						} else if(!isComposite(sourceEnd) && !isComposite(targetEnd) && isOneToMany(sourceEnd, targetEnd)){
-							hasManyMap.put(targetName,className) 
-        					attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
-						} else if(isOneToOne(sourceEnd, targetEnd)){
-						attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+							embeddedList.add(targetName as String)
+	        				attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+						} else if(!isComposite(sourceEnd) && !isComposite(targetEnd)){
+							if( isOneToMany(sourceEnd, targetEnd)){
+								hasManyMap.put(targetName,className) 
+        						attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+							} else if(isOneToOne(sourceEnd, targetEnd)){
+								attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
 %>	${firstCharUpper(targetName)} ${targetName}
 <%
+							}else if(isManyToMany(sourceEnd, targetEnd)){
+								hasManyMap.put(targetName,className)
+								attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+							}else if(isManyToOne(sourceEnd, targetEnd)){
+								attributeConstrainsMap.put("${targetName}",taggedValueMap(targetEnd))
+%>	${firstCharUpper(targetName)} ${targetName}
+<%		
+							}
 						}
 				}
 		}
