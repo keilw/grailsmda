@@ -4,7 +4,7 @@
 	<property name="env.CLASSPATH" value="" />
 	<property name="genpath" value="./target/src" />
 	<property name="genpathroot" value="./target" />
-	<property name="modelpath" value="jar:file:./model/agroUml.xmi.zargo!/agroUml.xmi" />
+	<property name="modelpath" value="file:./model/example.xmi" />
 	<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />
 	<property name="groovyMDA" value="./lib/groovymda-1.0.jar"/>
 	

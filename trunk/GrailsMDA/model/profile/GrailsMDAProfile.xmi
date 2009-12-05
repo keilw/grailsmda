@@ -1,0 +1,142 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sat Dec 05 12:36:30 CET 2009'>
+  <XMI.header>    <XMI.documentation>
+      <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
+      <XMI.exporterVersion>0.29.2(6) revised on $Date: 2007-05-12 08:08:08 +0200 (Sat, 12 May 2007) $ </XMI.exporterVersion>
+    </XMI.documentation>
+    <XMI.metamodel xmi.name="UML" xmi.version="1.4"/></XMI.header>
+  <XMI.content>
+    <UML:Model xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000001547'
+      name = 'GrailsMDAProfile' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+      isAbstract = 'false'>
+      <UML:ModelElement.stereotype>
+        <UML:Stereotype xmi.idref = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000001548'/>
+        <UML:Stereotype href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#.:0000000000000877'/>
+      </UML:ModelElement.stereotype>
+      <UML:Namespace.ownedElement>
+        <UML:Stereotype xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000001548'
+          name = 'profile' isSpecification = 'false' isRoot = 'false' isLeaf = 'false'
+          isAbstract = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000001AD1'
+          name = 'fetchMode' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DC1'
+          name = 'maxSize' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DC4'
+          name = 'table' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DC7'
+          name = 'joinTable' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DCA'
+          name = 'column' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DCB'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DCC'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DCD'
+          name = 'nullable' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DD0'
+          name = 'blank' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DD3'
+          name = 'composite' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DD4'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DD5'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DD6'
+          name = 'version' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DD9'
+          name = 'index' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DDA'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DDB'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DDC'
+          name = 'lazy' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DDD'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DDE'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DDF'
+          name = 'cascade' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DE0'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DE1'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DE2'
+          name = 'type' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DE5'
+          name = 'unique' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DE8'
+          name = 'sqlType' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DEB'
+          name = 'size' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DEE'
+          name = 'inList' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DEF'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DF0'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DF1'
+          name = 'min' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DF4'
+          name = 'max' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DF7'
+          name = 'range' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DFA'
+          name = 'scale' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DFD'
+          name = 'email' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E00'
+          name = 'minSize' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E03'
+          name = 'matches' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E06'
+          name = 'url' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E09'
+          name = 'notEqual' isSpecification = 'false'/>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E0C'
+          name = 'creditCard' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E0D'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E0E'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
+        <UML:TagDefinition xmi.id = '-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003E0F'
+          name = 'validator' isSpecification = 'false'/>
+      </UML:Namespace.ownedElement>
+    </UML:Model>
+  </XMI.content>
+</XMI>
