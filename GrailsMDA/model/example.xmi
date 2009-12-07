@@ -259,7 +259,7 @@
                     <UML:Multiplicity xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FAD'>
                       <UML:Multiplicity.range>
                         <UML:MultiplicityRange xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FAC'
-                          lower = '1' upper = '-1'/>
+                          lower = '1' upper = '1'/>
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
                   </UML:AssociationEnd.multiplicity>
@@ -274,7 +274,7 @@
                     <UML:Multiplicity xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FAA'>
                       <UML:Multiplicity.range>
                         <UML:MultiplicityRange xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FAB'
-                          lower = '1' upper = '1'/>
+                          lower = '1' upper = '-1'/>
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
                   </UML:AssociationEnd.multiplicity>
