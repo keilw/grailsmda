@@ -12,6 +12,8 @@ public class ${currentModelElement.name} {
 		final static String FETCH_MODE = "fetchMode"
 		final static String MAPPING = "mapping"
 		final static String CONSTRAINTS = "constraints"
+		final static String TRANSIENTS = "transients"
+		final static String NAMED_QUERIES = "namedQueries"
 		def belongsToMap = [:]
 		def hasManyMap = [:]
 		def embeddedList = []
@@ -19,6 +21,8 @@ public class ${currentModelElement.name} {
 		def attributeConstrainsMap=[:]
 		def mappedByList = taggedValueMap(MAPPED_BY, currentModelElement)
 		def fetchModeList = taggedValueMap(FETCH_MODE, currentModelElement)
+		def transientsList = taggedValueMap(TRANSIENTS, currentModelElement)
+		def namedQueriesList = taggedValueMap(NAMED_QUERIES, currentModelElement)
 		def mappingList = ["${currentModelElement.name}":taggedValueMap(MAPPING, currentModelElement).values()]
         getAttributes(currentModelElement).each { attribute ->
                 def attributeName = attribute.name
@@ -115,6 +119,20 @@ public class ${currentModelElement.name} {
 		fetchModeList.each{key, value ->
 %>	
 	static fetchMode = [${value}]
+<%
+		}
+	}
+	if(namedQueriesList.size()>0){	
+		namedQueriesList.each{key, value ->
+%>	
+	static namedQueries = {${value}}
+<%
+		}
+	}
+	if(transientsList.size()>0){	
+		transientsList.each{key, value ->
+%>	
+	static transients = [${value}]
 <%
 		}
 	}
