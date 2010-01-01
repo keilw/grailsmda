@@ -1,3 +1,4 @@
+
 import org.omg.uml.foundation.datatypes.AggregationKindEnum;
 
 
@@ -17,25 +18,31 @@ class DomainModelProcessor extends GroovyModelProcessor {
 			if (!fullyQualifiedName.startsWith("java") && fullyQualifiedName.size() > 0) {
 				
 				// YOU CAN BIND CLOSURES TO THE CONTEXT TO MAKE THEM ACCESSIBLE TO YOU TEMPLATES   
-				context.isComposite= { end -> return end.aggregation == AggregationKindEnum.AK_COMPOSITE
-						//.equals(AggregationKindEnum.COMPOSITE.typeName) 
-						}
+				context.isComposite= { end ->
+					return end.aggregation == AggregationKindEnum.AK_COMPOSITE
+					//.equals(AggregationKindEnum.COMPOSITE.typeName) 
+				}
 				
-				context.taggedValueMap = { taggedValueModel ->
-			       def tags = [:]
-			                   taggedValueModel.taggedValue.each { taggedValue ->
-			                       def key = taggedValue.type.name
-			                       def valueBuffer = new StringBuffer()
-			                       taggedValue.dataValue.each { value ->
-			                           if (valueBuffer.length() > 0) {
-			                               valueBuffer.append(",")
-			                           }
-			                           valueBuffer.append(value)
-			                       }
-			                       tags.put("${key}", "${valueBuffer.toString()}")
-			                   }
-			                   return tags
-			               }
+				context.taggedValueMap = { taggedValueKey, taggedValueModel ->
+					def tags = [:]
+					taggedValueModel.taggedValue.each { taggedValue ->
+						def key = taggedValue.type.name
+						if(key==taggedValueKey){
+							def valueBuffer = new StringBuffer()
+							taggedValue.dataValue.each { value ->
+								if (valueBuffer.length() > 0) {
+									valueBuffer.append(",")
+								}
+								valueBuffer.append(value)
+							}
+							if(tags.containsKey("${key}")){
+								key="${key}"+(tags.size()+1)
+							}
+							tags.put("${key}", "${valueBuffer.toString()}")
+						}
+					}
+					return tags
+				}
 				// SET THE TEMPLATE TO USE
 				def templateName = "./src/templates/domain/DomainModel.gtl"
 				
