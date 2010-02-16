@@ -4,16 +4,25 @@
 	<property name="env.CLASSPATH" value="" />
 	<property name="genpath" value="./target/src" />
 	<property name="genpathroot" value="./target" />
+	<property name="version" value="0.1" />
+	<property name="main-class" value="main.GrailsMdaMain" />
+	<property name="lib.dir" value="lib" />
+
 	<!--<property name="modelpath" value="file:./model/example.xmi" />-->
 	<!--<property name="modelpath" value="file:./model/agroUml.xmi" />-->
 	<property name="modelpath" value="file:./model/forumDeluxe.xmi" />
 	<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />
-	<property name="groovyMDA" value="./lib/groovymda-1.0.jar"/>
-	
+	<property name="groovyMDA" value="./lib/groovymda-1.0.jar" />
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+
+
 	<target name="clean">
-			<delete dir="${genpathroot}" />
+		<delete dir="${genpathroot}" />
 	</target>
-	
+
 	<target name="build">
 		<java fork="true" jar="${groovyMDA}">
 			<!-- model source file -->
@@ -25,4 +34,22 @@
 		</java>
 	</target>
 	<target name="clean-build" depends="clean,build" />
+
+	<target name="compile">
+		<mkdir dir="target/build/classes" />
+		<javac srcdir="src" destdir="target/build/classes" classpathref="classpath" />
+	</target>
+
+	<target name="jar" depends="compile">
+		<copy todir="target/build/classes/templates/domain/">
+			<fileset dir="src/templates/domain/" excludes="templates/domain/**.class" />
+		</copy>
+		<jar destfile="${genpathroot}/grailsMDA-${version}.jar">
+			<fileset dir="target/build/classes" excludes="**.java" />
+			<zipfileset src="${groovyMDA}" />
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
+	</target>
 </project>

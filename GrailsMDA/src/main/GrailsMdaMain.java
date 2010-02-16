@@ -1,5 +1,7 @@
 package main;
 
+import java.net.URL;
+
 import net.sf.groovymda.GroovyMDA;
 
 public class GrailsMdaMain {
@@ -19,9 +21,9 @@ public class GrailsMdaMain {
 		// set generating path to
 		bla[1] = args[1];
 		// set specific modelprocessor
-		bla[2] = "file:./model/domain/DomainModelProcessor.groovy";
-
-		// bla[2] = "file:" + DomainModelProcessor.class.getName();
+		// bla[2] = "file:/templates/domain/DomainModelProcessor.groovy";
+		URL test = Thread.currentThread().getContextClassLoader().getResource("templates/domain/DomainModelProcessor.groovy");
+		bla[2] = "jar:" + test.getPath();
 
 		GroovyMDA.main(bla);
 	}
