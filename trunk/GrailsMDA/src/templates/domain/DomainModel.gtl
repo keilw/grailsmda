@@ -8,12 +8,12 @@ package ${getPackageName(currentModelElement)};
 public class ${currentModelElement.name} {
        
 <%
-		final static String MAPPED_BY = "mappedBy"
-		final static String FETCH_MODE = "fetchMode"
-		final static String MAPPING = "mapping"
-		final static String CONSTRAINTS = "constraints"
-		final static String TRANSIENTS = "transients"
-		final static String NAMED_QUERIES = "namedQueries"
+		final String MAPPED_BY = "mappedBy"
+		final String FETCH_MODE = "fetchMode"
+		final String MAPPING = "mapping"
+		final String CONSTRAINTS = "constraints"
+		final String TRANSIENTS = "transients"
+		final String NAMED_QUERIES = "namedQueries"
 		def belongsToMap = [:]
 		def hasManyMap = [:]
 		def embeddedList = []
@@ -73,7 +73,7 @@ public class ${currentModelElement.name} {
 					}
 					
 					if(isOneToOne(sourceEnd, targetEnd) && !isComposite(targetEnd)){
-%>	${firstCharUpper(targetName)} ${targetName}
+%>	${firstCharUpper(className)} ${targetName}
 <%
 						attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))	
 						mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
@@ -84,7 +84,7 @@ public class ${currentModelElement.name} {
 					} else if(isOneToOne(sourceEnd, targetEnd) && !isComposite(targetEnd)){
 						attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 						mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
-%>	${firstCharUpper(targetName)} ${targetName}
+%>	${firstCharUpper(className)} ${targetName}
 <%
 					} else if(isManyToMany(sourceEnd, targetEnd) && !isComposite(targetEnd)){
 						hasManyMap.put(targetName,className)
@@ -93,7 +93,7 @@ public class ${currentModelElement.name} {
 					} else if(isManyToOne(sourceEnd, targetEnd) && !isComposite(targetEnd)){
 						attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 						mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
-%>	${firstCharUpper(targetName)} ${targetName}
+%>	${firstCharUpper(className)} ${targetName}
 <%		
 					}
 				}
