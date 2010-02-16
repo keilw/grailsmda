@@ -5,3 +5,7 @@
 1.) Download the latest *grailsMDA.jar* from http://code.google.com/p/grailsmda/downloads/list
 
 2.) Download the latest sample *build.xml* from http://code.google.com/p/grailsmda/downloads/list
+
+3.) Modify the "genpath", "modelpath" and "grailsMDA" properties in the *build.xml* so your model.xmi and the grailsMDA.jar can be found by the ant-run
+
+4.) Run the "clean-build" task
