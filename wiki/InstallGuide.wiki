@@ -2,4 +2,6 @@
 
 = Get started =
 
-*Download the latest *grailsMDA.jar* from http://code.google.com/p/grailsmda/downloads/list
+1.) Download the latest *grailsMDA.jar* from http://code.google.com/p/grailsmda/downloads/list
+
+2.) Download the latest sample *build.xml* from http://code.google.com/p/grailsmda/downloads/list
