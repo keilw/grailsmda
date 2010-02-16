@@ -5,7 +5,8 @@
 	<property name="genpath" value="./target/src" />
 	<property name="genpathroot" value="./target" />
 	<!--<property name="modelpath" value="file:./model/example.xmi" />-->
-	<property name="modelpath" value="file:./model/agroUml.xmi" />
+	<!--<property name="modelpath" value="file:./model/agroUml.xmi" />-->
+	<property name="modelpath" value="file:./model/forumDeluxe.xmi" />
 	<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />
 	<property name="groovyMDA" value="./lib/groovymda-1.0.jar"/>
 	
