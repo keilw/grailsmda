@@ -2,4 +2,4 @@
 
 = Get started =
 
-* Download the latest *bold*grailsMDA.jar from http://code.google.com/p/grailsmda/downloads/list
+*Download the latest *grailsMDA.jar* from http://code.google.com/p/grailsmda/downloads/list
