@@ -2,12 +2,8 @@
 
 = Get started =
 
-# Download the latest version of *grailsMDA.jar* from http://code.google.com/p/grailsmda/downloads/list
-
-# Download the latest version of *build.xml* from http://code.google.com/p/grailsmda/downloads/list
-
-# Modify the *genpath*, *modelpath* and *grailsMDA* properties in the *build.xml*
-
-# Run the "clean-build" task
-
-# Look into your *genpath* for generated grails domain classes
+ # Download the latest version of *grailsMDA.jar* from http://code.google.com/p/grailsmda/downloads/list
+ # Download the latest version of *build.xml* from http://code.google.com/p/grailsmda/downloads/list
+ # Modify the *genpath*, *modelpath* and *grailsMDA* properties in the *build.xml*
+ # Run the "clean-build" task
+ # Look into your *genpath* for generated grails domain classes
