@@ -14,6 +14,6 @@ Most of the applied tagValues are equivalent to the GORM definition, though ther
 ||transients||String||Will render the given constraint into the "trainsients" list. Notice that you can write a more complex comma separated contraint|| 
 ||
 
-==PropertyTags==
+==Property Tags== 
 ||*Name*||*Values*||*Description*||
 ||constraints||String||Given constraints will be rendered into "contstraints" closure||
