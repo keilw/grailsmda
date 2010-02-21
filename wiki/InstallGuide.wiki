@@ -5,6 +5,6 @@
  # Download the latest version of *grailsMDA.jar* from http://code.google.com/p/grailsmda/downloads/list
  # Download the latest version of *build.xml* from http://code.google.com/p/grailsmda/downloads/list
  # Modify the *genpath*, *modelpath* and *grailsMDA* properties in the *build.xml*
-   * Notice that *genpath* should bepointing to your grails project root folder 
+   * Notice that *genpath* should be pointing to your grails project root folder 
  # Run the "clean-build" task
  # Look into your *genpath* for generated grails domain classes
