@@ -1,4 +1,4 @@
-#Howto use grailsmda
+#summary Howto use grailsmda
 
 = Usage =
 
