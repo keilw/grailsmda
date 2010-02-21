@@ -1,4 +1,4 @@
-#List of all useable tags
+#summary List of all useable tags
 
 ==Introduction==
 Most of the applied tagValues are equivalent to the GORM definition, though there are some special tags that were added for better controlling of generating content.
@@ -17,3 +17,4 @@ Most of the applied tagValues are equivalent to the GORM definition, though ther
 ==Property Tags== 
 || *Name* || *Values* || *Description* ||
 || *constraints* ||String||Given constraints will be rendered into *constraints* closure||
+|| *mappedBy* ||String||Will render a property as given into the *mappedBy* map||
