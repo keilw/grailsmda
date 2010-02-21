@@ -16,4 +16,4 @@ Most of the applied tagValues are equivalent to the GORM definition, though ther
 
 ==Property Tags== 
 ||*Name*||*Values*||*Description*||
-||constraints||String||Given constraints will be rendered into "contstraints" closure||
+||constraints||String||Given constraints will be rendered into "constraints" closure||
