@@ -5,7 +5,7 @@ Most of the applied tagValues are equivalent to the GORM definition, though ther
 
 
 ==Class Tags==
-||*Name*||*Values*||*Description*||
+|| *Name* || *Values* || *Description* ||
 ||valueObject||true/false||If true a value object will be generated for assigend class||
 ||createController||true/false||If true a default scaffolding controller will be generated for that class||
 ||mapping||String||Will render a given *mapping* constraint into the mapping closure||
@@ -15,5 +15,5 @@ Most of the applied tagValues are equivalent to the GORM definition, though ther
 ||
 
 ==Property Tags== 
-||*Name*||*Values*||*Description*||
+|| *Name* || *Values* || *Description* ||
 ||constraints||String||Given constraints will be rendered into *constraints* closure||
