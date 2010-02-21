@@ -4,15 +4,16 @@
 	<property name="env.CLASSPATH" value="" />
 	<property name="genpath" value="./target/src" />
 	<property name="genpathroot" value="./target" />
-	<property name="version" value="0.1" />
+	<property name="version" value="0.2.1" />
 	<property name="main-class" value="main.GrailsMdaMain" />
 	<property name="lib.dir" value="lib" />
 
 	<!--<property name="modelpath" value="file:./model/example.xmi" />-->
 	<property name="modelpath" value="jar:file:./model/agroUml.xmi.zargo!/agroUml.xmi" />
 	<!--<property name="modelpath" value="file:./model/forumDeluxe.xmi" />-->
-	<!--<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />-->
-	<property name="modelprocessorpath" value="file:./src/templates/valueobject/ValueObjectProcessor.groovy" />
+	<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />
+	<!--<property name="modelprocessorpath" value="file:./src/templates/valueobject/ValueObjectProcessor.groovy" />-->
+	<!--<property name="modelprocessorpath" value="file:./src/templates/controller/ControllerProcessor.groovy" />-->
 	
 	<property name="groovyMDA" value="./lib/groovymda-1.0.jar" />
 
