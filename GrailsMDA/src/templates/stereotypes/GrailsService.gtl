@@ -1,5 +1,3 @@
-import org.omg.uml.foundation.core.Operation;
-
 <%= getPackageName(currentModelElement)? "package ${getPackageName(currentModelElement)}":"" %>
 
 /**
@@ -22,7 +20,7 @@ public class ${currentModelElement.name} {
 			def methodVisibility = visibility(method.visibility)
 			def methodReturn = ""
 			def methodParameters = ""
-
+			
 			method.getParameter().each{
 				it.name!="return"?methodParameters+="${javaType(it.type)} ${it.name}, ":""
 				if(it.name=="return" && it.type){ 
