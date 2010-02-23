@@ -180,6 +180,14 @@ class ValueObjectProcessor  {
 		return findFeatures(classifier, Attribute.class)
 	}
 	
+	def visibility={ visibility ->
+		return VisibilityKindEnum.VK_PRIVATE==visibility?"private":VisibilityKindEnum.VK_PROTECTED==visibility?"protected":VisibilityKindEnum.VK_PUBLIC==visibility?"public":""
+	}
+	
+	def getMethods = { classifier ->
+		return findFeatures(classifier, Operation.class)
+	}
+	
 	def loadResourceStream = { name ->
 		def inputStream
 		def file = new File(name)
@@ -208,7 +216,9 @@ class ValueObjectProcessor  {
 		"isManyToOne":isManyToOne,
 		"isManyToMany":isManyToMany,
 		"isOwner":isOwner,
-		"isCollection":isCollection
+		"isCollection":isCollection,
+		"visibility":visibility,
+		"getMethods":getMethods
 		]
 		if (map) {
 			binding.putAll(map)
