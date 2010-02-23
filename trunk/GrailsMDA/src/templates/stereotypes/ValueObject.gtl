@@ -6,10 +6,6 @@
 
 public class ${currentModelElement.name}VO {
 	
-	public ${currentModelElement.name}VO(def domainClass){
-		convertObj(domainClass)
-	}
-	
 <%
         getAttributes(currentModelElement).each { attribute ->
                 def attributeName = attribute.name
@@ -31,8 +27,7 @@ public class ${currentModelElement.name}VO {
 					methodType=javaType(it.type)
 				}
 			}
-			methodParameters -=", "
-			
+			methodParameters -=", "		
 %>	
 	${methodVisibility} ${methodType} ${methodName} ($methodParameters){
 		${methodReturn}
@@ -40,14 +35,4 @@ public class ${currentModelElement.name}VO {
 <%
 		}
 %>   
-	private void convertObj(def domainClass){
-		def propertiesMap = this.properties
-		propertiesMap.remove("class")
-		propertiesMap.remove("metaClass")
-		propertiesMap.each{k,v ->
-			if(domainClass.hasProperty("\$k")){
-				this."\$k" = domainClass."\$k"
-			}
-		} 
-	}
 }
