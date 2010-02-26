@@ -1,14 +1,15 @@
 package templates.stereotypes
 
-
 import groovy.text.SimpleTemplateEngine 
+
+import groovy.text.SimpleTemplateEngine
 import org.omg.uml.foundation.core.Attribute
 import org.omg.uml.foundation.core.DataType
-import org.omg.uml.foundation.core.Operation;
-import org.omg.uml.foundation.core.UmlClass 
+import org.omg.uml.foundation.core.UmlClass
+import org.omg.uml.foundation.datatypes.OrderingKindEnum
 import org.omg.uml.foundation.datatypes.VisibilityKindEnum;
-import org.omg.uml.modelmanagement.Model 
-
+import org.omg.uml.modelmanagement.Model
+import org.omg.uml.foundation.core.Operation
 
 
 class StereotypesProcessor  {
@@ -30,6 +31,8 @@ class StereotypesProcessor  {
 					if(namespace){
 						buffer.insert(0, namespace.name)
 					}
+				}else{
+					break
 				}
 			}
 			
@@ -237,6 +240,9 @@ class StereotypesProcessor  {
 	
 	def processTemplate = { templateName, outputName, context ->
 		def outputFile = new File(getOutputPath(context, outputName))
+		if(outputFile.exists()){
+			outputFile.delete()
+		}
 		outputFile.parentFile.mkdirs()
 		outputFile << new SimpleTemplateEngine()
 		.createTemplate(new InputStreamReader(loadResourceStream(templateName)))
@@ -273,15 +279,22 @@ class StereotypesProcessor  {
 				def rootFolder = "src/templates/stereotypes"
 				
 				if(isGrailsService(context.currentModelElement)) {
-					println("[Generating GrailsService] ${fullyQualifiedName}")
+					println("[Generating GrailsServiceInterface] ${fullyQualifiedName}Interface")
 					// SET THE TEMPLATE TO USE
 					templateName = "$rootFolder/GrailsService.gtl"
-					
 					// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
-					outputName = "grails-app/services/${fullyQualifiedName.replace('.','/')}.groovy"
-					
+					outputName = "src/groovy/${fullyQualifiedName.replace('.','/')}Interface.groovy"
 					// PROCESS THE TEMPLATE
 					processTemplate(templateName, outputName, context)
+					
+					outputName =  "grails-app/services/${fullyQualifiedName.replace('.','/')}.groovy"
+					if(!fileExists(outputName, context)){
+						println("[Generating GrailsServiceImpl] ${fullyQualifiedName}")
+						// SET THE TEMPLATE TO USE
+						templateName = "$rootFolder/GrailsServiceImpl.gtl"									
+						// PROCESS THE TEMPLATE
+						processTemplate(templateName, outputName, context)
+					}
 				}
 				if(isController(context.currentModelElement)) {
 					println("[Generating Controller] ${fullyQualifiedName}")
@@ -334,6 +347,11 @@ class StereotypesProcessor  {
 			value = "$key"==STEREOTYPE_VALUE_OBJECT
 		}
 		return value
+	}
+	
+	boolean fileExists(String outputPath, def model){
+		def file = new File(getOutputPath(model, outputPath))
+		return file.exists()
 	}
 	
 }
