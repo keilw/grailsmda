@@ -1,32 +1,46 @@
 package templates.domain
-import groovy.text.SimpleTemplateEngine 
-import org.omg.uml.foundation.core.Attribute
-import org.omg.uml.foundation.core.DataType
-import org.omg.uml.foundation.core.UmlClass 
-import org.omg.uml.foundation.datatypes.AggregationKindEnum
-import org.omg.uml.modelmanagement.Model 
+
+import java.io.File;
+
 import groovy.text.SimpleTemplateEngine
 import org.omg.uml.foundation.core.Attribute
 import org.omg.uml.foundation.core.DataType
 import org.omg.uml.foundation.core.UmlClass
+import org.omg.uml.foundation.datatypes.AggregationKindEnum;
 import org.omg.uml.foundation.datatypes.OrderingKindEnum
+import org.omg.uml.foundation.datatypes.VisibilityKindEnum;
 import org.omg.uml.modelmanagement.Model
+import org.omg.uml.foundation.core.Operation
+
 
 
 
 class DomainModelProcessor  {
-	
+	static final String STEREOTYPE_GRAILS_SERVICE = "GrailsService"
+	static final String STEREOTYPE_VALUE_OBJECT = "ValueObject"
+	static final String STEREOTYPE_CONTROLLER = "Controller"
 	
 	def getPackageName = { modelElement ->
+		
 		def namespace = modelElement
 		def buffer = new StringBuffer()
-		while (true) {
-			namespace = namespace.namespace
-			if (namespace instanceof Model) break
-			if (buffer.length() > 0) buffer.insert(0, '.')
-			buffer.insert(0, namespace.name)
+		if(namespace){
+			while (true) {
+				if(namespace){
+					namespace = namespace.namespace
+					if (namespace instanceof Model) break
+					if (buffer.length() > 0) buffer.insert(0, '.')
+					if(namespace){
+						buffer.insert(0, namespace.name)
+					}
+				}else{
+					break
+				}
+			}
+			
+			return buffer.toString().trim()
 		}
-		return buffer.toString().trim()
+		return ""
 	}
 	
 	def getFullyQualifiedName = { modelElement ->
@@ -221,7 +235,10 @@ class DomainModelProcessor  {
 		"isOwner":isOwner,
 		"isCollection":isCollection,
 		"visibility":visibility,
-		"getMethods":getMethods
+		"getMethods":getMethods,
+		"constraintValueMap":constraintValueMap,
+		"taggedValueMap":taggedValueMap,
+		"isComposite":isComposite
 		]
 		if (map) {
 			binding.putAll(map)
@@ -231,6 +248,9 @@ class DomainModelProcessor  {
 	
 	def processTemplate = { templateName, outputName, context ->
 		def outputFile = new File(getOutputPath(context, outputName))
+		if(outputFile.exists()){
+			outputFile.delete()
+		}
 		outputFile.parentFile.mkdirs()
 		outputFile << new SimpleTemplateEngine()
 		.createTemplate(new InputStreamReader(loadResourceStream(templateName)))
@@ -245,76 +265,117 @@ class DomainModelProcessor  {
 		return path
 	}	
 	
+	def constraintValueMap = { constraintValueKey, constraintValueModel ->
+		def tags = [:]
+		constraintValueModel.constraint.each { constraint ->
+			def key = constraint.name
+			if(key==constraintValueKey){
+				def valueBuffer = new StringBuffer()
+				constraint.body.each { value ->
+					if (valueBuffer.length() > 0) {
+						valueBuffer.append(",")
+					}
+					valueBuffer.append(value)
+				}
+				if(tags.containsKey("${key}")){
+					key="${key}"+(tags.size()+1)
+				}
+				tags.put("${key}", "${valueBuffer.toString()}")
+			}
+		}
+		return tags
+	}
+	
+	def taggedValueMap = { taggedValueKey, taggedValueModel ->
+		def tags = [:]
+		taggedValueModel.taggedValue.each { taggedValue ->
+			def key = taggedValue.type?.name
+			if(key==taggedValueKey){
+				def valueBuffer = new StringBuffer()
+				taggedValue.dataValue.each { value ->
+					if (valueBuffer.length() > 0) {
+						valueBuffer.append(",")
+					}
+					valueBuffer.append(value)
+				}
+				if(tags.containsKey("${key}")){
+					key="${key}"+(tags.size()+1)
+				}
+				tags.put("${key}", "${valueBuffer.toString()}")
+			}
+		}
+		return tags
+	}
+	
+	def isComposite= { end ->
+		return end.aggregation == AggregationKindEnum.AK_COMPOSITE
+	}
+	
 	void process(Map context) {
 		// ITERATE THROUGH EACH CLASS IN THE MODEL
 		getAllClasses(context.model).each { modelElement ->
-			// ADD THE CURRENT MODEL ELEMENT TO THE CONTEXT
-			context.currentModelElement = modelElement
-			
-			// GET THE FULLY QUALIFIED NAME FOR THE CLASS
-			def fullyQualifiedName = getFullyQualifiedName(context.currentModelElement)
-			
-			// ONLY PROCESS NON JRE CLASSES (java.lang.String does not need to be generated)
-			if (!fullyQualifiedName.startsWith("java") && fullyQualifiedName.size() > 0) {
-				println("[Generating DomainClass] ${fullyQualifiedName}")
-				// YOU CAN BIND CLOSURES TO THE CONTEXT TO MAKE THEM ACCESSIBLE TO YOU TEMPLATES   
-				context.isComposite= { end ->
-					return end.aggregation == AggregationKindEnum.AK_COMPOSITE
-					//.equals(AggregationKindEnum.COMPOSITE.typeName) 
-				}
-				
-				context.taggedValueMap = { taggedValueKey, taggedValueModel ->
-					def tags = [:]
-					taggedValueModel.taggedValue.each { taggedValue ->
-						def key = taggedValue.type.name
-						if(key==taggedValueKey){
-							def valueBuffer = new StringBuffer()
-							taggedValue.dataValue.each { value ->
-								if (valueBuffer.length() > 0) {
-									valueBuffer.append(",")
-								}
-								valueBuffer.append(value)
-							}
-							if(tags.containsKey("${key}")){
-								key="${key}"+(tags.size()+1)
-							}
-							tags.put("${key}", "${valueBuffer.toString()}")
-						}
+			if(!isGrailsService(modelElement)&&!isController(modelElement)&&!isValueObject(modelElement)&&!isVoidObject(modelElement)){
+				// ADD THE CURRENT MODEL ELEMENT TO THE CONTEXT
+				context.currentModelElement = modelElement
+				// GET THE FULLY QUALIFIED NAME FOR THE CLASS
+				def fullyQualifiedName = getFullyQualifiedName(modelElement)
+				// ONLY PROCESS NON JRE CLASSES (java.lang.String does not need to be generated)
+				if (!fullyQualifiedName.startsWith("java") && fullyQualifiedName.size() > 0) {
+					println("[Generating DomainClass] ${fullyQualifiedName}")
+					//Generate domain classes
+					// SET THE TEMPLATE TO USE
+					def templateName = "src/templates/domain/DomainModel.gtl"
+					// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
+					def outputName = "${fullyQualifiedName.replace('.','/')}.groovy"
+					// PROCESS THE TEMPLATE
+					processTemplate(templateName, outputName, context)
+					
+					//generate impl class for domain model, if not existing
+					
+					outputName = "${fullyQualifiedName.replace('.','/')}Impl.groovy"
+					def file = new File(getOutputPath(context, outputName))
+					if(!file.exists()){
+						println("[Generating ImplObject] ${fullyQualifiedName}Impl")
+						// SET THE TEMPLATE TO USE
+						templateName = "src/templates/domain/DomainModelImpl.gtl"
+						// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
+						// PROCESS THE TEMPLATE
+						processTemplate(templateName, outputName, context)
 					}
-					return tags
 				}
-				
-				context.constraintValueMap = { constraintValueKey, constraintValueModel ->
-					def tags = [:]
-					constraintValueModel.constraint.each { constraint ->
-						def key = constraint.name
-						if(key==constraintValueKey){
-							def valueBuffer = new StringBuffer()
-							constraint.body.each { value ->
-								if (valueBuffer.length() > 0) {
-									valueBuffer.append(",")
-								}
-								valueBuffer.append(value)
-							}
-							if(tags.containsKey("${key}")){
-								key="${key}"+(tags.size()+1)
-							}
-							tags.put("${key}", "${valueBuffer.toString()}")
-						}
-					}
-					return tags
-				}
-				// SET THE TEMPLATE TO USE
-				def templateName = "templates/domain/DomainModel.gtl"
-				
-				// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
-				def outputName = "${fullyQualifiedName.replace('.','/')}.groovy"
-				
-				// PROCESS THE TEMPLATE
-				processTemplate(templateName, outputName, context)
-				
 			}
 		}
+	}
+	
+	boolean isGrailsService(def model){
+		boolean value = false
+		model.stereotype.each { type ->
+			def key = type.name
+			value = "$key"==STEREOTYPE_GRAILS_SERVICE
+		}
+		return value
+	}
+	
+	boolean isController(def model){
+		boolean value = false
+		model.stereotype.each { type ->
+			def key = type.name
+			value = "$key"==STEREOTYPE_CONTROLLER
+		}
+		return value
+	}
+	
+	boolean isValueObject(def model){
+		boolean value = false
+		model.stereotype.each { type ->
+			def key = type.name
+			value = "$key"==STEREOTYPE_VALUE_OBJECT
+		}
+		return value
+	}
+	
+	boolean isVoidObject(def model){
+		return model.name=="void"
 	}
 	
 }

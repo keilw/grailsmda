@@ -24,7 +24,7 @@ public class ${currentModelElement.name} {
 		def namedQueriesList = taggedValueMap(NAMED_QUERIES, currentModelElement)
 		def mappingList = ["${currentModelElement.name}":taggedValueMap(MAPPING, currentModelElement).values()]
         getAttributes(currentModelElement).each { attribute ->
-                def attributeName = attribute.name
+                def attributeName = attribute?.name
                 def attributeType = javaType(attribute.type)
                 
 %>	${attributeType} ${attributeName}
@@ -37,7 +37,7 @@ public class ${currentModelElement.name} {
                 def targetEnd = association.connection.find { end -> end != sourceEnd }
 				def targetType = getEndType(targetEnd)
 				def targetName = "${getEndName(targetEnd)}"
-				def	className = "${targetEnd.participant.name}"//"${firstCharUpper(targetName)[0..-2]}"
+				def	className = "${targetEnd.participant?.name}"//"${firstCharUpper(targetName)[0..-2]}"
                 if (!sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
 						if(isOneToOne(sourceEnd, targetEnd)){
 %>	${firstCharUpper(targetName)} ${targetName}
@@ -140,11 +140,12 @@ public class ${currentModelElement.name} {
 	static embedded = ${embeddedList}
 <%
 	}
+	mappingList.putAll(['tablePerHierarchy':['true']])
 	if(mappingList.size()>0) {
 		def valueBuffer = new StringBuffer()
 		mappingList.each{ key, value ->
 			if(value.size()>0){
-				if(key!=currentModelElement.name){
+				if(key!=currentModelElement?.name){
 					value.each{valueText->
 						valueBuffer.append("${key} ${valueText}")
 						valueBuffer.append("\n\t\t")
@@ -182,27 +183,6 @@ public class ${currentModelElement.name} {
 <%	
 		} 
 %>	}
-<%
-	}
-	getMethods(currentModelElement).each { method ->
-		def methodName = method.name
-		def methodType =  method.getSpecification()?method.getSpecification():"def"
-		def methodVisibility = visibility(method.visibility)
-		def methodReturn = ""
-		def methodParameters = ""
-		method.getParameter().each{
-			it.name!="return"?methodParameters+="${javaType(it.type)} ${it.name}, ":""
-			if(it.name=="return" && it.type){ 
-				methodReturn="return null"
-				methodType=javaType(it.type)
-			}
-		}
-		methodParameters -=", "
-		
-%>	
-		${methodVisibility} ${methodType} ${methodName} ($methodParameters){
-			${methodReturn}
-		}
 <%
 	}
 %>
