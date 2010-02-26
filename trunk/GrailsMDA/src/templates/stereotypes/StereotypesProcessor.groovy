@@ -297,15 +297,24 @@ class StereotypesProcessor  {
 					}
 				}
 				if(isController(context.currentModelElement)) {
-					println("[Generating Controller] ${fullyQualifiedName}")
+					println("[Generating ControllerInterface] ${fullyQualifiedName}Interface")
 					// SET THE TEMPLATE TO USE
 					templateName = "$rootFolder/Controller.gtl"
 					
 					// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
-					outputName = "grails-app/controllers/${fullyQualifiedName.replace('.','/')}.groovy"	
+					outputName = "src/groovy/${fullyQualifiedName.replace('.','/')}Interface.groovy"	
 					
 					// PROCESS THE TEMPLATE
 					processTemplate(templateName, outputName, context)
+					
+					outputName =  "grails-app/controllers/${fullyQualifiedName.replace('.','/')}.groovy"
+					if(!fileExists(outputName, context)){
+						println("[Generating ControllerImpl] ${fullyQualifiedName}")
+						// SET THE TEMPLATE TO USE
+						templateName = "$rootFolder/ControllerImpl.gtl"									
+						// PROCESS THE TEMPLATE
+						processTemplate(templateName, outputName, context)
+					}
 				}
 				if(isValueObject(context.currentModelElement)) {
 					println("[Generating ValueObject] ${fullyQualifiedName}")
