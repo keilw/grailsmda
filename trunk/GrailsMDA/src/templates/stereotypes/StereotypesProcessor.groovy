@@ -283,7 +283,7 @@ class StereotypesProcessor  {
 					// SET THE TEMPLATE TO USE
 					templateName = "$rootFolder/GrailsService.gtl"
 					// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
-					outputName = "src/groovy/${fullyQualifiedName.replace('.','/')}Interface.groovy"
+					outputName = "src/groovy/${getPackageName(modelElement).replace('.','/')}/interfaces/service/${modelElement.name}Interface.groovy"	
 					// PROCESS THE TEMPLATE
 					processTemplate(templateName, outputName, context)
 					
@@ -296,13 +296,14 @@ class StereotypesProcessor  {
 						processTemplate(templateName, outputName, context)
 					}
 				}
+				
 				if(isController(context.currentModelElement)) {
 					println("[Generating ControllerInterface] ${fullyQualifiedName}Interface")
 					// SET THE TEMPLATE TO USE
 					templateName = "$rootFolder/Controller.gtl"
 					
 					// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
-					outputName = "src/groovy/${fullyQualifiedName.replace('.','/')}Interface.groovy"	
+					outputName = "src/groovy/${getPackageName(modelElement).replace('.','/')}/interfaces/controller/${modelElement.name}Interface.groovy"	
 					
 					// PROCESS THE TEMPLATE
 					processTemplate(templateName, outputName, context)
