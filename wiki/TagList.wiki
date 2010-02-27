@@ -21,6 +21,6 @@ Most of the applied tagValues are equivalent to the GORM definition, though ther
 
 ==Stereotypes== 
 || *Name* ||
-|| *GrailsService* ||
-|| *Controller* ||
-|| *ValueObject* ||
+|| *GrailsService*||
+|| *Controller*||
+|| *ValueObject*||
