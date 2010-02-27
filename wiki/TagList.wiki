@@ -18,3 +18,9 @@ Most of the applied tagValues are equivalent to the GORM definition, though ther
 || *Name* || *Values* || *Description* ||
 || *constraints* ||String||Given constraints will be rendered into *constraints* closure||
 || *mappedBy* ||String||Will render a property as given into the *mappedBy* map||
+
+==Stereotypes== 
+|| *Name* ||
+|| *GrailsService* ||
+|| *Controller* ||
+|| *ValueObject* ||
