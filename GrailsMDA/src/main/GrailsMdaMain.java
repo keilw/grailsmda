@@ -52,5 +52,16 @@ public class GrailsMdaMain {
 		extendedArgs[2] = "jar:" + processorPath.getPath();
 
 		GroovyMDA.main(extendedArgs);
+
+		// Generating ValueObject classes
+		extendedArgs = new String[3];
+		extendedArgs[0] = args[0];
+		// set generating path to
+		extendedArgs[1] = args[1] + "/";
+		// set specific modelprocessor
+		processorPath = Thread.currentThread().getContextClassLoader().getResource("templates/stereotypes/StereotypesProcessor.groovy");
+		extendedArgs[2] = "jar:" + processorPath.getPath();
+
+		GroovyMDA.main(extendedArgs);
 	}
 }

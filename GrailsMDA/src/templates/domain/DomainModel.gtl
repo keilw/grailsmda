@@ -160,7 +160,10 @@ public class ${currentModelElement.name} {
 		}
 		if(valueBuffer.length()>3){
 			valueBuffer.delete(valueBuffer.length()-3,valueBuffer.length())
+
+		def comment = "//tablePerHierarchy has to be true, since impl class should also work on the same table"
 %>	
+	$comment 
 	static mapping = { 
 		${valueBuffer.toString()}
 	}
