@@ -4,7 +4,7 @@
 	<property name="env.CLASSPATH" value="" />
 	<property name="genpath" value="./target/src" />
 	<property name="genpathroot" value="./target" />
-	<property name="version" value="0.2.1" />
+	<property name="version" value="0.2.2" />
 	<property name="main-class" value="main.GrailsMdaMain" />
 	<property name="lib.dir" value="lib" />
 

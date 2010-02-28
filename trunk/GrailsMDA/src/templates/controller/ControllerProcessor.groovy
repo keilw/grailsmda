@@ -16,13 +16,23 @@ class ControllerProcessor  {
 	def getPackageName = { modelElement ->
 		def namespace = modelElement
 		def buffer = new StringBuffer()
-		while (true) {
-			namespace = namespace.namespace
-			if (namespace instanceof Model) break
-			if (buffer.length() > 0) buffer.insert(0, '.')
-			buffer.insert(0, namespace.name)
+		if(namespace){
+			while (true) {
+				if(namespace){
+					namespace = namespace.namespace
+					if (namespace instanceof Model) break
+					if (buffer.length() > 0) buffer.insert(0, '.')
+					if(namespace){
+						buffer.insert(0, namespace.name)
+					}
+				}else{
+					break
+				}
+			}
+			
+			return buffer.toString().trim()
 		}
-		return buffer.toString().trim()
+		return ""
 	}
 	
 	def getFullyQualifiedName = { modelElement ->
@@ -270,7 +280,7 @@ class ControllerProcessor  {
 	boolean isCreateControllerSet(def model){
 		boolean isValueObjectTaggedValueSet = false
 		model.taggedValue.each { taggedValue ->
-			def key = taggedValue.type.name
+			def key = taggedValue.type?.name
 			if(key==CREATE_CONTROLLER_TAG){
 				taggedValue.dataValue.each{ value ->
 					isValueObjectTaggedValueSet = "${value}" as Boolean 

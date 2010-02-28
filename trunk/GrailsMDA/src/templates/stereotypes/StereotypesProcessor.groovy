@@ -19,7 +19,6 @@ class StereotypesProcessor  {
 	static final String STEREOTYPE_CONTROLLER = "Controller"
 	
 	def getPackageName = { modelElement ->
-		
 		def namespace = modelElement
 		def buffer = new StringBuffer()
 		if(namespace){
@@ -34,8 +33,7 @@ class StereotypesProcessor  {
 				}else{
 					break
 				}
-			}
-			
+			}		
 			return buffer.toString().trim()
 		}
 		return ""
@@ -276,7 +274,7 @@ class StereotypesProcessor  {
 			if (!fullyQualifiedName.startsWith("java") && fullyQualifiedName.size() > 0 ){
 				def templateName
 				def outputName 
-				def rootFolder = "src/templates/stereotypes"
+				def rootFolder = "templates/stereotypes"
 				
 				if(isGrailsService(context.currentModelElement)) {
 					println("[Generating GrailsServiceInterface] ${fullyQualifiedName}Interface")

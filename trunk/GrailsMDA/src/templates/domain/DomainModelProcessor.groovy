@@ -324,20 +324,20 @@ class DomainModelProcessor  {
 					println("[Generating DomainClass] ${fullyQualifiedName}")
 					//Generate domain classes
 					// SET THE TEMPLATE TO USE
-					def templateName = "src/templates/domain/DomainModel.gtl"
+					def templateName = "templates/domain/DomainModel.gtl"
 					// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
 					def outputName = "${fullyQualifiedName.replace('.','/')}.groovy"
 					// PROCESS THE TEMPLATE
 					processTemplate(templateName, outputName, context)
 					
 					//generate impl class for domain model, if not existing
+					outputName = "src/groovy/${getPackageName(modelElement).replace('.','/')}/impl/${modelElement.name}Impl.groovy"	
 					
-					outputName = "${fullyQualifiedName.replace('.','/')}Impl.groovy"
 					def file = new File(getOutputPath(context, outputName))
 					if(!file.exists()){
-						println("[Generating ImplObject] ${fullyQualifiedName}Impl")
+						println("[Generating ImplObject] ${getPackageName(modelElement)}.impl.${modelElement.name}Impl.groovy")
 						// SET THE TEMPLATE TO USE
-						templateName = "src/templates/domain/DomainModelImpl.gtl"
+						templateName = "templates/domain/DomainModelImpl.gtl"
 						// SET THE OUTPUT FILE NAME FOR THE FULLY QUALIFIED NAME
 						// PROCESS THE TEMPLATE
 						processTemplate(templateName, outputName, context)
