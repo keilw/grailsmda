@@ -11,10 +11,10 @@
 	<!--<property name="modelpath" value="file:./model/example.xmi" />-->
 	<property name="modelpath" value="file:./model/agroUml.xmi" />
 	<!--<property name="modelpath" value="file:./model/forumDeluxe.xmi" />-->
-	<!--<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />-->
+	<property name="modelprocessorpath" value="file:./src/templates/domain/DomainModelProcessor.groovy" />
 	<!--<property name="modelprocessorpath" value="file:./src/templates/valueobject/ValueObjectProcessor.groovy" />-->
 	<!--<property name="modelprocessorpath" value="file:./src/templates/controller/ControllerProcessor.groovy" />-->
-	<property name="modelprocessorpath" value="file:./src/templates/stereotypes/StereotypesProcessor.groovy" />
+	<!--<property name="modelprocessorpath" value="file:./src/templates/stereotypes/StereotypesProcessor.groovy" />-->
 	
 	<property name="groovyMDA" value="./lib/groovymda-1.0.jar" />
 

@@ -37,59 +37,79 @@ public class ${currentModelElement.name} {
                 def targetEnd = association.connection.find { end -> end != sourceEnd }
 				def targetType = getEndType(targetEnd)
 				def targetName = "${getEndName(targetEnd)}"
-				def	className = "${targetEnd.participant?.name}"//"${firstCharUpper(targetName)[0..-2]}"
+				def	className = "${targetEnd.participant?.name}"
+				
+				//source <-> target == source - targe
+				if(isComposite(sourceEnd)) {
+					//source <>- target
+					embeddedList.add(targetName as String)
+				}
+				
                 if (!sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
+					//source -> target
 						if(isOneToOne(sourceEnd, targetEnd)){
+							//source 1->1 target
 %>	${firstCharUpper(targetName)} ${targetName}
 <%
 							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 						} else if(isManyToMany(sourceEnd, targetEnd)){
+						//source *->* target
 							hasManyMap.put(targetName,className)
 							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 						} else if(isOneToMany(sourceEnd, targetEnd)){
-							belongsToMap.put("${firstCharLower(targetName)}",className)
+						//source 1->* target
+							hasManyMap.put(targetName,className)
+							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
+							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
+						}else if(isManyToOne(sourceEnd, targetEnd)){
+%>	${firstCharUpper(targetName)} ${targetName}
+<%
+							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
+							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 						}
         				
                 } else if (sourceEnd.isNavigable() && !targetEnd.isNavigable()){
+                	//source <- target
 						if(isOneToOne(sourceEnd, targetEnd)){
+							//source 1<-1 target
 							belongsToMap.put("${firstCharLower(targetName)}",className)
 						} else if(isManyToMany(sourceEnd, targetEnd)){
+							//source *<-* target
 							belongsToMap.put("${firstCharLower(className)}",className)
 							hasManyMap.put(targetName,className)
 							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 						} else if(isOneToMany(sourceEnd, targetEnd)){
+							//source 1<-* target
+							belongsToMap.put("${firstCharLower(className)}",className)
 							hasManyMap.put(targetName,className)
 							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
+						} else if(isManyToOne(sourceEnd, targetEnd)){
+							//source *<-1 target
+							belongsToMap.put("${firstCharLower(targetName)}",className)
 						}
 				} else if (sourceEnd.isNavigable()&&targetEnd.isNavigable()) {
-				
-					if(isComposite(sourceEnd)) {
-						embeddedList.add(targetName as String)
-					}
-					
 					if(isOneToOne(sourceEnd, targetEnd) && !isComposite(targetEnd)){
+						//source 1-1 target
 %>	${firstCharUpper(className)} ${targetName}
 <%
 						attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))	
 						mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 					} else if( isOneToMany(sourceEnd, targetEnd) && !isComposite(targetEnd)){
+					//source 1-* target
 						hasManyMap.put(targetName,className) 
         				attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
         				mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
-					} else if(isOneToOne(sourceEnd, targetEnd) && !isComposite(targetEnd)){
-						attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
-						mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
-%>	${firstCharUpper(className)} ${targetName}
-<%
 					} else if(isManyToMany(sourceEnd, targetEnd) && !isComposite(targetEnd)){
+					//source *-* target
 						hasManyMap.put(targetName,className)
 						attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 						mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 					} else if(isManyToOne(sourceEnd, targetEnd) && !isComposite(targetEnd)){
+					//source *-1 target
 						attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
 						mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 %>	${firstCharUpper(className)} ${targetName}
