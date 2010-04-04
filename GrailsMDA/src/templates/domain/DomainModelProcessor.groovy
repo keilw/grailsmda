@@ -19,6 +19,7 @@ class DomainModelProcessor  {
 	static final String STEREOTYPE_GRAILS_SERVICE = "GrailsService"
 	static final String STEREOTYPE_VALUE_OBJECT = "ValueObject"
 	static final String STEREOTYPE_CONTROLLER = "Controller"
+	static final String	TAGVALUE_IMPL_OBJECT = "implObject"
 	
 	def getPackageName = { modelElement ->
 		
@@ -251,6 +252,7 @@ class DomainModelProcessor  {
 		if(outputFile.exists()){
 			outputFile.delete()
 		}
+		println templateName
 		outputFile.parentFile.mkdirs()
 		outputFile << new SimpleTemplateEngine()
 		.createTemplate(new InputStreamReader(loadResourceStream(templateName)))
@@ -331,10 +333,10 @@ class DomainModelProcessor  {
 					processTemplate(templateName, outputName, context)
 					
 					//generate impl class for domain model, if not existing
-					outputName = "src/groovy/${getPackageName(modelElement).replace('.','/')}/impl/${modelElement.name}Impl.groovy"	
+					outputName = "${getPackageName(modelElement).replace('.','/')}/impl/${modelElement.name}Impl.groovy"	
 					
 					def file = new File(getOutputPath(context, outputName))
-					if(!file.exists()){
+					if(!file.exists() && isImplObject(modelElement)){
 						println("[Generating ImplObject] ${getPackageName(modelElement)}.impl.${modelElement.name}Impl.groovy")
 						// SET THE TEMPLATE TO USE
 						templateName = "templates/domain/DomainModelImpl.gtl"
@@ -345,6 +347,17 @@ class DomainModelProcessor  {
 				}
 			}
 		}
+	}
+	
+	boolean isImplObject(def model){
+		boolean value = false
+		model.taggedValue.each { taggedValue ->
+			def key = taggedValue.type?.name
+			if(key==TAGVALUE_IMPL_OBJECT&&taggedValue.dataValue==["true"]){
+				value = true
+			}
+		}
+		return value
 	}
 	
 	boolean isGrailsService(def model){

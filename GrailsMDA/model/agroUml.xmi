@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8' ?>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Tue Feb 23 22:10:45 CET 2010'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sun Apr 04 18:27:22 CEST 2010'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.28.1(6) revised on $Date: 2007-05-12 08:08:08 +0200 (Sat, 12 May 2007) $ </XMI.exporterVersion>
@@ -44,6 +44,13 @@
                   <UML:TaggedValue.dataValue>false</UML:TaggedValue.dataValue>
                   <UML:TaggedValue.type>
                     <UML:TagDefinition href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#-64--88-0-101--2259be85:11dd526880c:-8000:000000000000E4A7'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--78-20--53b1a94c:127c999222e:-8000:0000000000001297'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>true</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition href = './profile/GrailsMDAProfile.xmi#-64--88--78-20-78ac3be7:127c94ab6c4:-8000:00000000000014E6'/>
                   </UML:TaggedValue.type>
                 </UML:TaggedValue>
               </UML:ModelElement.taggedValue>
@@ -100,13 +107,13 @@
               isAbstract = 'false'>
               <UML:Association.connection>
                 <UML:AssociationEnd xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F8D'
-                  visibility = 'public' isSpecification = 'false' isNavigable = 'false' ordering = 'unordered'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
                   aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
                   <UML:AssociationEnd.multiplicity>
-                    <UML:Multiplicity xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F8E'>
+                    <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001285'>
                       <UML:Multiplicity.range>
-                        <UML:MultiplicityRange xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F8F'
-                          lower = '1' upper = '1'/>
+                        <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001284'
+                          lower = '0' upper = '-1'/>
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
                   </UML:AssociationEnd.multiplicity>
@@ -118,10 +125,10 @@
                   visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
                   aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
                   <UML:AssociationEnd.multiplicity>
-                    <UML:Multiplicity xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F91'>
+                    <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:000000000000128F'>
                       <UML:Multiplicity.range>
-                        <UML:MultiplicityRange xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F92'
-                          lower = '1' upper = '1'/>
+                        <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:000000000000128E'
+                          lower = '0' upper = '-1'/>
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
                   </UML:AssociationEnd.multiplicity>
@@ -178,6 +185,13 @@
                     <UML:TagDefinition href = './profile/GrailsMDAProfile.xmi#-64--88--78-20--18b1a06a:1255e46eaae:-8000:0000000000003DD6'/>
                   </UML:TaggedValue.type>
                 </UML:TaggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--78-20--53b1a94c:127c999222e:-8000:0000000000001296'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>true</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition href = './profile/GrailsMDAProfile.xmi#-64--88--78-20-78ac3be7:127c94ab6c4:-8000:00000000000014E6'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
               </UML:ModelElement.taggedValue>
               <UML:Classifier.feature>
                 <UML:Attribute xmi.id = '-64--88--78-20-51747db0:1253bc8db0d:-8000:0000000000000FA3'
@@ -223,13 +237,13 @@
               isAbstract = 'false'>
               <UML:Association.connection>
                 <UML:AssociationEnd xmi.id = '-64--88--78-20-51747db0:1253bc8db0d:-8000:0000000000000FAD'
-                  name = 'myAuthors' visibility = 'public' isSpecification = 'false' isNavigable = 'false'
+                  name = 'myAuthors' visibility = 'public' isSpecification = 'false' isNavigable = 'true'
                   ordering = 'unordered' aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
                   <UML:AssociationEnd.multiplicity>
-                    <UML:Multiplicity xmi.id = '-64--88--78-20-51747db0:1253bc8db0d:-8000:0000000000000FB6'>
+                    <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001283'>
                       <UML:Multiplicity.range>
-                        <UML:MultiplicityRange xmi.id = '-64--88--78-20-51747db0:1253bc8db0d:-8000:0000000000000FB5'
-                          lower = '1' upper = '-1'/>
+                        <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001282'
+                          lower = '1' upper = '1'/>
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
                   </UML:AssociationEnd.multiplicity>
@@ -259,7 +273,7 @@
               isAbstract = 'false'>
               <UML:Association.connection>
                 <UML:AssociationEnd xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FA6'
-                  visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
+                  visibility = 'public' isSpecification = 'false' isNavigable = 'false' ordering = 'unordered'
                   aggregation = 'composite' targetScope = 'instance' changeability = 'changeable'>
                   <UML:AssociationEnd.multiplicity>
                     <UML:Multiplicity xmi.id = '-64--88-30-29--61d52c8b:125689fe9e3:-8000:00000000000014CB'>
@@ -277,10 +291,10 @@
                   visibility = 'public' isSpecification = 'false' isNavigable = 'true' ordering = 'unordered'
                   aggregation = 'none' targetScope = 'instance' changeability = 'changeable'>
                   <UML:AssociationEnd.multiplicity>
-                    <UML:Multiplicity xmi.id = '-64--88-30-29--61d52c8b:125689fe9e3:-8000:00000000000014C9'>
+                    <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:000000000000128D'>
                       <UML:Multiplicity.range>
-                        <UML:MultiplicityRange xmi.id = '-64--88-30-29--61d52c8b:125689fe9e3:-8000:00000000000014C8'
-                          lower = '1' upper = '-1'/>
+                        <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:000000000000128C'
+                          lower = '1' upper = '1'/>
                       </UML:Multiplicity.range>
                     </UML:Multiplicity>
                   </UML:AssociationEnd.multiplicity>
@@ -369,6 +383,30 @@
         </UML:Stereotype>
       </UML:Namespace.ownedElement>
     </UML:Model>
+    <UML:Multiplicity xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F8E'>
+      <UML:Multiplicity.range>
+        <UML:MultiplicityRange xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F8F'
+          lower = '1' upper = '1'/>
+      </UML:Multiplicity.range>
+    </UML:Multiplicity>
+    <UML:Multiplicity xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F91'>
+      <UML:Multiplicity.range>
+        <UML:MultiplicityRange xmi.id = '-64--88--78-20--36cfe931:1253bc07be3:-8000:0000000000000F92'
+          lower = '1' upper = '1'/>
+      </UML:Multiplicity.range>
+    </UML:Multiplicity>
+    <UML:Multiplicity xmi.id = '-64--88--78-20-51747db0:1253bc8db0d:-8000:0000000000000FB6'>
+      <UML:Multiplicity.range>
+        <UML:MultiplicityRange xmi.id = '-64--88--78-20-51747db0:1253bc8db0d:-8000:0000000000000FB5'
+          lower = '1' upper = '-1'/>
+      </UML:Multiplicity.range>
+    </UML:Multiplicity>
+    <UML:Multiplicity xmi.id = '-64--88-30-29--61d52c8b:125689fe9e3:-8000:00000000000014C9'>
+      <UML:Multiplicity.range>
+        <UML:MultiplicityRange xmi.id = '-64--88-30-29--61d52c8b:125689fe9e3:-8000:00000000000014C8'
+          lower = '1' upper = '-1'/>
+      </UML:Multiplicity.range>
+    </UML:Multiplicity>
     <UML:Multiplicity xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FAD'>
       <UML:Multiplicity.range>
         <UML:MultiplicityRange xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FAC'
@@ -421,6 +459,24 @@
       <UML:Multiplicity.range>
         <UML:MultiplicityRange xmi.id = '-64--88-30-29-12312118:1254a8b3383:-8000:0000000000000FA8'
           lower = '1' upper = '1'/>
+      </UML:Multiplicity.range>
+    </UML:Multiplicity>
+    <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001287'>
+      <UML:Multiplicity.range>
+        <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001286'
+          lower = '0' upper = '-1'/>
+      </UML:Multiplicity.range>
+    </UML:Multiplicity>
+    <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001289'>
+      <UML:Multiplicity.range>
+        <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:0000000000001288'
+          lower = '1' upper = '-1'/>
+      </UML:Multiplicity.range>
+    </UML:Multiplicity>
+    <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:000000000000128B'>
+      <UML:Multiplicity.range>
+        <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:000000000000128A'
+          lower = '1' upper = '-1'/>
       </UML:Multiplicity.range>
     </UML:Multiplicity>
     <UML:Class xmi.id = '-64--88--78-20--14c7d6cc:126fca79dc8:-8000:0000000000001280'

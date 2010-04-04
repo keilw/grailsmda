@@ -63,6 +63,17 @@
             </UML:Multiplicity>
           </UML:TagDefinition.multiplicity>
         </UML:TagDefinition>
+         <UML:TagDefinition xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:00000000000014E6'
+          name = 'implObject' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:00000000000014E7'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--78-20-78ac3be7:127c94ab6c4:-8000:00000000000014E8'
+                  lower = '0' upper = '1'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
       </UML:Namespace.ownedElement>
     </UML:Model>
   </XMI.content>
