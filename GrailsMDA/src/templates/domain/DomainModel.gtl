@@ -160,7 +160,9 @@ public class ${currentModelElement.name} {
 	static embedded = ${embeddedList}
 <%
 	}
-	mappingList.putAll(['tablePerHierarchy':['true']])
+	if(isImplObject(currentModelElement)){
+		mappingList.putAll(['tablePerHierarchy':['true']])
+	}
 	if(mappingList.size()>0) {
 		def valueBuffer = new StringBuffer()
 		mappingList.each{ key, value ->
