@@ -239,7 +239,8 @@ class DomainModelProcessor  {
 		"getMethods":getMethods,
 		"constraintValueMap":constraintValueMap,
 		"taggedValueMap":taggedValueMap,
-		"isComposite":isComposite
+		"isComposite":isComposite,
+		"isImplObject":isImplObject
 		]
 		if (map) {
 			binding.putAll(map)
@@ -252,7 +253,6 @@ class DomainModelProcessor  {
 		if(outputFile.exists()){
 			outputFile.delete()
 		}
-		println templateName
 		outputFile.parentFile.mkdirs()
 		outputFile << new SimpleTemplateEngine()
 		.createTemplate(new InputStreamReader(loadResourceStream(templateName)))
@@ -349,7 +349,7 @@ class DomainModelProcessor  {
 		}
 	}
 	
-	boolean isImplObject(def model){
+	def isImplObject={model->
 		boolean value = false
 		model.taggedValue.each { taggedValue ->
 			def key = taggedValue.type?.name
