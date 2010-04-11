@@ -1,0 +1,1 @@
+grailsmda.model.path='file:${basedir}/mda/agroUml.xmi'
