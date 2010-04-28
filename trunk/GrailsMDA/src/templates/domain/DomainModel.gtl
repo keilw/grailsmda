@@ -82,17 +82,17 @@ public class ${currentModelElement.name} {
 							if(isBelongsTo(sourceEnd)){
 								belongsToMap.put("${firstCharLower(className)}",className)
 							}
-							hasManyMap.put(targetName,className)
-							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
-							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
+							//hasManyMap.put(targetName,className)
+							//attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
+							//mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 						} else if(isOneToMany(sourceEnd, targetEnd)){
 							//source 1<-* target
 							if(isBelongsTo(sourceEnd)){
 								belongsToMap.put("${firstCharLower(className)}",className)
 							}
-							hasManyMap.put(targetName,className)
-							attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
-							mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
+							//hasManyMap.put(targetName,className)
+							//attributeConstrainsMap.put("${targetName}",taggedValueMap(CONSTRAINTS,targetEnd))
+							//mappingList.put("${targetName}",taggedValueMap(MAPPING, targetEnd).values())
 						} else if(isManyToOne(sourceEnd, targetEnd)){
 							//source *<-1 target
 							if(isBelongsTo(sourceEnd)){
