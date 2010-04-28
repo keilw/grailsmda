@@ -20,6 +20,7 @@ class DomainModelProcessor  {
 	static final String STEREOTYPE_VALUE_OBJECT = "ValueObject"
 	static final String STEREOTYPE_CONTROLLER = "Controller"
 	static final String	TAGVALUE_IMPL_OBJECT = "implObject"
+	static final String	TAGVALUE_BELONGS_TO = "belongsTo"
 	
 	def getPackageName = { modelElement ->
 		
@@ -354,6 +355,17 @@ class DomainModelProcessor  {
 		model.taggedValue.each { taggedValue ->
 			def key = taggedValue.type?.name
 			if(key==TAGVALUE_IMPL_OBJECT&&taggedValue.dataValue==["true"]){
+				value = true
+			}
+		}
+		return value
+	}
+	
+	def isBelongsTo={model->
+		boolean value = false
+		model.taggedValue.each { taggedValue ->
+			def key = taggedValue.type?.name
+			if(key==TAGVALUE_BELONGS_TO&&taggedValue.dataValue==["true"]){
 				value = true
 			}
 		}
