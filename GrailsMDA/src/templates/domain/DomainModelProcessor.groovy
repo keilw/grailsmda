@@ -241,7 +241,8 @@ class DomainModelProcessor  {
 		"constraintValueMap":constraintValueMap,
 		"taggedValueMap":taggedValueMap,
 		"isComposite":isComposite,
-		"isImplObject":isImplObject
+		"isImplObject":isImplObject,
+		"isBelongsTo":isBelongsTo
 		]
 		if (map) {
 			binding.putAll(map)
