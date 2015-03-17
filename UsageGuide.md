@@ -1,0 +1,3 @@
+# Usage #
+
+Before I start  I assume that you already installed the grailsMDa.jar properly in your project, if not have a look at http://code.google.com/p/grailsmda/wiki/InstallGuide

@@ -1,0 +1,27 @@
+## Introduction ##
+Most of the applied tagValues are equivalent to the GORM definition, though there are some special tags that were added for better controlling of generating content.
+
+
+## Class Tags ##
+| **Name** | **Values** | **Description** |
+|:---------|:-----------|:----------------|
+| **valueObject** |true/false|If true a value object will be generated for assigend class|
+| **createController** |true/false|If true a default scaffolding controller will be generated for that class|
+| **mapping** |String|Will render a given **mapping** constraint into the mapping closure|
+| **mappedBy** |String|Will render an assosiation end as given into the **mappedBy** map|
+| **fetchMode** |String|Will render the given constraint into the **fetchMode** map. Notice that you can write a more complex comma separated contraint|
+| **transients** |String|Will render the given constraint into the **trainsients** list. Notice that you can write a more complex comma separated contraint|
+
+
+## Property Tags ##
+| **Name** | **Values** | **Description** |
+|:---------|:-----------|:----------------|
+| **constraints** |String|Given constraints will be rendered into **constraints** closure|
+| **mappedBy** |String|Will render a property as given into the **mappedBy** map|
+
+## Stereotypes ##
+| **Name** |
+|:---------|
+| **GrailsService**|
+| **Controller**|
+| **ValueObject**|
